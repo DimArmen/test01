@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run: echo "this is the test job"
       - run: ls
-  build:image:
+  build-image:
     docker:
       - image: docker:latest
     steps:
@@ -35,6 +35,6 @@ workflows:
       - test:
           requires:
             - build
-      - build:image:
+      - build-image:
           requires:
             - test
