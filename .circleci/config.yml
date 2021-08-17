@@ -25,6 +25,9 @@ jobs:
           version: 19.03.13
       - run: |
           docker build -t test . 
+      - run: |
+          echo $CIRCLE_SHA1
+          echo $CIRCLE_PROJECT_REPONAME
 
 # Orchestrate our job run sequence
 workflows:
