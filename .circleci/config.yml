@@ -17,17 +17,25 @@ jobs:
       - run: echo "this is the test job"
       - run: ls
   build-image:
+    IMAGE_NAME: $CIRCLE_PROJECT_REPONAME:$CIRCLE_SHA1
     docker:
       - image: docker:latest
+      auth:
+        username: dimarmen
+        password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
       - run: |
-          docker build -t test . 
+          docker build -t $IMAGE_NAME .
+          docker push dimarmen/$IMAGE_NAME
+
       - run: |
           echo $CIRCLE_SHA1
           echo $CIRCLE_PROJECT_REPONAME
+          echo $IMAGE_NAME
+
 
 # Orchestrate our job run sequence
 workflows:
