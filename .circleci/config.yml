@@ -29,8 +29,8 @@ jobs:
       - setup_remote_docker:
           version: 19.03.13
       - run: |
-          docker build -t dimarmen/test01 .
-          docker push dimarmen/test01
+          docker build -t dimarmen/test01:latest .
+          docker push dimarmen/test01:latest
       - run: |
           echo $CIRCLE_SHA1
           echo $CIRCLE_PROJECT_REPONAME
