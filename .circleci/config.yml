@@ -17,7 +17,8 @@ jobs:
       - run: echo "this is the test job"
       - run: ls
   build-image:
-    IMAGE_NAME: $CIRCLE_PROJECT_REPONAME:$CIRCLE_SHA1
+    environment:
+      IMAGE_NAME: $CIRCLE_PROJECT_REPONAME:$CIRCLE_SHA1
     docker:
       - image: docker:latest
         auth:
@@ -30,7 +31,6 @@ jobs:
       - run: |
           docker build -t $IMAGE_NAME .
           docker push dimarmen/$IMAGE_NAME
-
       - run: |
           echo $CIRCLE_SHA1
           echo $CIRCLE_PROJECT_REPONAME
