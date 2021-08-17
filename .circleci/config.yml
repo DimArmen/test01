@@ -5,7 +5,6 @@ jobs:
   build:
     docker:
       - image: ubuntu:latest
-        auth:
     steps:
       - checkout
       - run: echo "this is the build job"
@@ -17,6 +16,16 @@ jobs:
       - checkout
       - run: echo "this is the test job"
       - run: ls
+  build:image:
+    docker:
+      - image: docker:latest
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+      - run: |
+          docker build -t test . 
 
 # Orchestrate our job run sequence
 workflows:
@@ -26,3 +35,6 @@ workflows:
       - test:
           requires:
             - build
+      - build:image:
+          requires:
+            - test
