@@ -24,6 +24,8 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
+      - run:
+          command: apt-get update -y
       - run: |
           docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
           docker build -t $DOCKERHUB_USERNAME/test01:$CIRCLE_SHA1 .
