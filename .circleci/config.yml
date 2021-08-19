@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run: echo "this is the test job"
       - run: ls
-      - run: apt update && apt install curl 
+      - run: apt update -y && apt install curl -y 
   build-image:
     docker:
       - image: docker:latest
