@@ -33,7 +33,6 @@ jobs:
           docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
           docker build -t $DOCKERHUB_USERNAME/test01:$CIRCLE_SHA1 .
           docker push $DOCKERHUB_USERNAME/test01:$CIRCLE_SHA1
-          /usr/bin/apt update && /usr/bin/apt install curl
       - slack/notify:
           event: pass
           template: success_tagged_deploy_1
