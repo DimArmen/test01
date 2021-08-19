@@ -17,7 +17,6 @@ jobs:
       - checkout
       - run: echo "this is the test job"
       - run: ls
-      - run: apt update -y && apt install curl -y 
   build-image:
     docker:
       - image: docker:latest
@@ -28,7 +27,7 @@ jobs:
       - run:
           command: |
             apk update
-            apk add curl
+            apk add curl jq 
       - run: |
           docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
           docker build -t $DOCKERHUB_USERNAME/test01:$CIRCLE_SHA1 .
